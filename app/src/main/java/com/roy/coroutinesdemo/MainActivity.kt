@@ -5,8 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
-
-
+import kotlinx.coroutines.CoroutineName
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 
 
 class MainActivity : AppCompatActivity() {
@@ -16,7 +17,7 @@ class MainActivity : AppCompatActivity() {
 
         tv_test.setOnClickListener{
             var coroutines1 = Coroutines1()
-            coroutines1.start4()
+            coroutines1.start5()
         }
 
         tv_01.setOnClickListener{
@@ -39,7 +40,8 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this,"暂无功能",0).show()
         }
         tv_05.setOnClickListener{
-            Toast.makeText(this,"暂无功能",0).show()
+          //  Toast.makeText(this,"暂无功能",0).show()
+        Text01().suspendTest1()
         }
 
     }

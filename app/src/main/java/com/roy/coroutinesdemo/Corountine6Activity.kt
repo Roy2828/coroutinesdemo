@@ -14,8 +14,10 @@ class Corountine6Activity : AppCompatActivity() {
 
         tv_one.setOnClickListener{
             val p = Corountine6()
-            // p.test01()
-            p.test3()
+            //  p.test01()
+              p.test2()
+           // p.test3()
+            //p.test3()
         }
     }
 }

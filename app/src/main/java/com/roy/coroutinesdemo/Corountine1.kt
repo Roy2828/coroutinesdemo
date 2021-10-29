@@ -12,7 +12,7 @@ import kotlin.coroutines.EmptyCoroutineContext
 
 fun test1(){
     var coroutines1 = Coroutines1()
-    coroutines1.start()
+    coroutines1.start5()
     //coroutines1.start1()
     //coroutines1.start2()
     //coroutines1.start3()
@@ -38,6 +38,16 @@ class Coroutines1 {
         GlobalScope.async {   //程序代码运行到这里 还没跳到协程 main函数就结束了
             //delay(2000)
             log("async 启动一个协程")  //这段代码也不会执行到
+        }
+
+
+        GlobalScope.launch {
+            withContext(Dispatchers.IO){
+
+            }
+            withContext(Dispatchers.Main){
+
+            }
         }
     }
 
@@ -121,6 +131,16 @@ class Coroutines1 {
             }
         }
 
+
+    }
+
+    fun start5(){
+        GlobalScope.launch(Dispatchers.IO) {
+            delay(2000)
+            log("launch 启动一个协程")
+        }
+
+GlobalScope.async {  }
     }
 
 }

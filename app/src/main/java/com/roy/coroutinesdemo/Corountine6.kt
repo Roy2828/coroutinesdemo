@@ -36,7 +36,7 @@ class Corountine6 {
         log("2")
     }
 
-    fun test01() {
+    fun test01() {//主从和协同
         log("0")
 
        //  var handler = GlobleHandler() ; //自定义协程全局异常捕获 这个类加载 CoroutineExceptionHandlerImplKt.class
@@ -55,7 +55,7 @@ class Corountine6 {
                 }  //会阻塞  直到5秒后 下面代码才会执行
 
                 val childjob1 =launch(Dispatchers.IO) {
-                    for (i in 0..100) {
+                    for (i in 0..10) {
                         delay(500)
                         log("i = $i")
                     }
@@ -75,7 +75,7 @@ class Corountine6 {
         log("2")
     }
 
-    fun test2() {
+    fun test2() {  //主从作用域
         GlobalScope.launch {
             val job = SupervisorJob()
 
@@ -85,19 +85,21 @@ class Corountine6 {
             }
             with(CoroutineScope(coroutineContext + job)){//主从作用域   with表示在当前作用域
                 val childjob1 =launch(Dispatchers.IO) {
-                    for (i in 0..100) {
+                    for (i in 0..10) {
                         delay(500)
                         log("i = $i")
                     }
                 }
-                val childjob2 =launch(Dispatchers.IO) {//不是主从作用域，而是协调作用域  主从作用域只能管根下一级协程
-                    launch {
+                val childjob2 =launch(Dispatchers.IO) {
 
-                    }
                     launch {
                         throw NullPointerException()
                     }
-                    log("readfile before")
+
+                    launch {
+                        log("readfile before")
+                    }
+
 //                readFile()
 
                     log("readfile end ")
@@ -110,7 +112,7 @@ class Corountine6 {
 
     }
 
-  fun  test3(){
+  fun  test3(){ //协同作用域
       //  var handler = GlobleHandler() ;
       val coroutineContext = Job() + Dispatchers.Default + CoroutineName("myContext")
 

@@ -11,8 +11,8 @@ import kotlinx.coroutines.*
 
 fun main(){
     val t = Corountine2()
-    t.start()
-    //t.coroutineContextTest()
+    //t.start()
+    t.coroutineContextTest()
     //t.coroutineContextTest1()
     Thread.sleep(1000)
 }
@@ -30,7 +30,7 @@ class Corountine2 {
     }
 
     fun coroutineContextTest(){
-        val coroutineContext = Job() + Dispatchers.Default + CoroutineName("myContext")
+        val coroutineContext =  Job()+Dispatchers.Default + CoroutineName("myContext")
         log("$coroutineContext,${coroutineContext[CoroutineName]}")
         val newCoroutineContext = coroutineContext.minusKey(CoroutineName)
         log("$newCoroutineContext")
