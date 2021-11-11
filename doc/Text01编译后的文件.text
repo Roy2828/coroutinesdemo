@@ -1,0 +1,98 @@
+final class Text01$start$1 extends SuspendLambda implements Function2<CoroutineScope, Continuation<? super Unit>, Object> {
+    private /* synthetic */ Object L$0;
+    int label;
+    final /* synthetic */ Text01 this$0;
+
+    /* JADX INFO: super call moved to the top of the method (can break code semantics) */
+    Text01$start$1(Text01 text01, Continuation<? super Text01$start$1> continuation) {
+        super(2, continuation);
+        this.this$0 = text01;
+    }
+
+    public final Continuation<Unit> create(Object obj, Continuation<?> continuation) {
+        Text01$start$1 text01$start$1 = new Text01$start$1(this.this$0, continuation);
+        text01$start$1.L$0 = obj;
+        return text01$start$1;
+    }
+
+    public final Object invoke(CoroutineScope coroutineScope, Continuation<? super Unit> continuation) {
+        return ((Text01$start$1) create(coroutineScope, continuation)).invokeSuspend(Unit.INSTANCE);
+    }
+
+    public final Object invokeSuspend(Object obj) {
+        IntrinsicsKt.getCOROUTINE_SUSPENDED();
+        if (this.label == 0) {
+            ResultKt.throwOnFailure(obj);//这里是异常处理机制
+            CoroutineScope $this$launch = (CoroutineScope) this.L$0;   //定义一个协程作用于变量
+            UtilsExtKt.log("launch 启动一个协程开始");
+            final Text01 text01 = this.this$0;
+            //去启动协程
+            Job unused = BuildersKt__Builders_commonKt.launch$default($this$launch, Dispatchers.getIO(), (CoroutineStart) null, new C11821((Continuation<? super C11821>) null), 2, (Object) null);
+            Job unused2 = BuildersKt__Builders_commonKt.launch$default($this$launch, Dispatchers.getMain(), (CoroutineStart) null, new C11832((Continuation<? super C11832>) null), 2, (Object) null);
+            UtilsExtKt.log("launch 启动一个协程结束");
+            return Unit.INSTANCE;
+        }
+        throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+    }
+
+    @Metadata(mo14122d1 = {"\u0000\n\n\u0000\n\u0002\u0010\u0002\n\u0002\u0018\u0002\u0010\u0000\u001a\u00020\u0001*\u00020\u0002H@"}, mo14123d2 = {"<anonymous>", "", "Lkotlinx/coroutines/CoroutineScope;"}, mo14124k = 3, mo14125mv = {1, 5, 1}, mo14127xi = 48)
+    @DebugMetadata(mo14835c = "com.roy.coroutinesdemo.Text01$start$1$1", mo14836f = "Text01.kt", mo14837i = {}, mo14838l = {44}, mo14839m = "invokeSuspend", mo14840n = {}, mo14841s = {})
+    /* renamed from: com.roy.coroutinesdemo.Text01$start$1$1 */
+    /* compiled from: Text01.kt */
+    static final class C11821 extends SuspendLambda implements Function2<CoroutineScope, Continuation<? super Unit>, Object> {
+        int label;
+
+        public final Continuation<Unit> create(Object obj, Continuation<?> continuation) {
+            return new C11821(text01, continuation);
+        }
+
+        public final Object invoke(CoroutineScope coroutineScope, Continuation<? super Unit> continuation) {
+            return ((C11821) create(coroutineScope, continuation)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        public final Object invokeSuspend(Object $result) {
+            Object coroutine_suspended = IntrinsicsKt.getCOROUTINE_SUSPENDED();
+            int i = this.label; //状态机用于协程恢复异常处理
+            if (i == 0) {
+                ResultKt.throwOnFailure($result);//这里是异常处理机制
+                this.label = 1;  //将状态机赋值为1
+                if (text01.demo(this) == coroutine_suspended) { //判断是不是挂起函数
+                    return coroutine_suspended;
+                }
+            } else if (i == 1) {
+                ResultKt.throwOnFailure($result); //内部还有判断是否抛异常
+                // 恢复协程后再执行一次 resumeWith()，然后无异常的话执行最后的代码
+            } else {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            UtilsExtKt.log("launch 启动一个协程3IO");
+            return Unit.INSTANCE;
+        }
+    }
+
+    @Metadata(mo14122d1 = {"\u0000\n\n\u0000\n\u0002\u0010\u0002\n\u0002\u0018\u0002\u0010\u0000\u001a\u00020\u0001*\u00020\u0002H@"}, mo14123d2 = {"<anonymous>", "", "Lkotlinx/coroutines/CoroutineScope;"}, mo14124k = 3, mo14125mv = {1, 5, 1}, mo14127xi = 48)
+    @DebugMetadata(mo14835c = "com.roy.coroutinesdemo.Text01$start$1$2", mo14836f = "Text01.kt", mo14837i = {}, mo14838l = {}, mo14839m = "invokeSuspend", mo14840n = {}, mo14841s = {})
+    /* renamed from: com.roy.coroutinesdemo.Text01$start$1$2 */
+    /* compiled from: Text01.kt */
+    static final class C11832 extends SuspendLambda implements Function2<CoroutineScope, Continuation<? super Unit>, Object> {
+        int label;
+
+        public final Continuation<Unit> create(Object obj, Continuation<?> continuation) {
+            return new C11832(continuation);
+        }
+
+        public final Object invoke(CoroutineScope coroutineScope, Continuation<? super Unit> continuation) {
+            return ((C11832) create(coroutineScope, continuation)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        public final Object invokeSuspend(Object obj) {
+            IntrinsicsKt.getCOROUTINE_SUSPENDED();
+            if (this.label == 0) {
+                ResultKt.throwOnFailure(obj);
+                UtilsExtKt.log("launch 启动一个协程3IO");
+                return Unit.INSTANCE;
+            }
+            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+        }
+    }
+}
